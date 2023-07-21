@@ -110,9 +110,8 @@ const App = () => {
       })
         .catch(error => {
           setIsError(true)
-          setActionMessage(
-            `Information of ${newName} has already been removed from server` 
-          )
+          setActionMessage(error.response.data.error)
+          console.log(error.response.data.error)
           setTimeout(() => {
             setActionMessage(null)
           }, 5000)
@@ -140,6 +139,14 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+        })
+        .catch(error => {
+          console.log(error.response.data.error)
+          setIsError(true)
+          setActionMessage(error.response.data.error)
+          setTimeout(() => {
+            setActionMessage(null)
+          }, 5000)
         })
     }
   }
